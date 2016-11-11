@@ -48,7 +48,7 @@ class Db extends mysqli{
 		return $res;
 	}
 
-
+	/* Insert one single row using an associative array */
 	public function insert($table, $values){
 		if(empty($values)) return false;
 
@@ -67,6 +67,7 @@ class Db extends mysqli{
 		return $this->exec($sql);
 	}
 
+	/* Executes a batch of queries in one array */
 	public function multi_exec($sql){
 		$ret = [
 			"e" => false,
@@ -85,6 +86,7 @@ class Db extends mysqli{
 		return $ret;
 	}
 
+	/* Escapes strings and removes slashes if possible */
 	public function sanitize($str){
 	  if(is_array($str)){
 	      foreach($str as $k => $val) $output[$k] = $this->sanitize($val);
@@ -95,9 +97,5 @@ class Db extends mysqli{
 	  return $output;
 	}
 
-	public function text2url($str){ return $str; }
-
-	/* Debbug function */
-	public function debbug(){ var_dump($this); }
 }
 ?>
